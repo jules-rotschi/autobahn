@@ -13,7 +13,9 @@ public class Main {
     frame.setResizable(false);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-    final AutobahnGame autobahn = new AutobahnGame(BOARD_WIDTH, BOARD_HEIGHT, Double.valueOf(args[0]));
+    double traficDensity = args.length >= 1 ? Double.valueOf(args[0]) : 0.5;
+
+    final AutobahnGame autobahn = new AutobahnGame(BOARD_WIDTH, BOARD_HEIGHT, traficDensity);
     frame.add(autobahn);
     frame.pack();
     autobahn.requestFocus();

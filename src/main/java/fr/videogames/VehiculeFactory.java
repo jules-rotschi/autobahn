@@ -27,28 +27,43 @@ public class VehiculeFactory {
   } 
 
   Vehicule createUserCar(LaneName laneName, int y, double speed) {
-    Vehicule userCar = new Vehicule(VehiculeType.CAR, 0, y, CAR_WIDTH, CAR_HEIGHT, speed, CAR_BRAKING_FORCE);
+    Vehicule userCar = new Vehicule(VehiculeType.CAR, CarColor.BLUE, 0, y, CAR_WIDTH, CAR_HEIGHT, speed, CAR_BRAKING_FORCE);
     userCar.setLane(laneName, road);
     return userCar;
   }
 
-  AiVehicule createAiCar(LaneName laneName, int y, double speed) {
-    AiVehicule vehicule = new AiVehicule(VehiculeType.CAR, 0, y, CAR_WIDTH, CAR_HEIGHT, speed, CAR_BRAKING_FORCE);
+  AiVehicule createAiCar(CarColor color, LaneName laneName, int y, double speed) {
+    AiVehicule vehicule = new AiVehicule(VehiculeType.CAR, color, 0, y, CAR_WIDTH, CAR_HEIGHT, speed, CAR_BRAKING_FORCE);
     vehicule.setLane(laneName, road);
     return vehicule;
   }
 
   AiVehicule createAiTruck(LaneName laneName, int y, double speed) {
-    AiVehicule vehicule = new AiVehicule(VehiculeType.TRUCK, 0, y, TRUCK_WIDTH, TRUCK_HEIGHT, speed, TRUCK_BRAKING_FORCE);
+    AiVehicule vehicule = new AiVehicule(VehiculeType.TRUCK, CarColor.DEFAULT, 0, y, TRUCK_WIDTH, TRUCK_HEIGHT, speed, TRUCK_BRAKING_FORCE);
     vehicule.setLane(laneName, road);
     return vehicule;
   }
 
   AiVehicule createRandomAiVehicule(LaneName laneName, int y) {
-    double random = Math.random();
-
-    if (random >= TRUCK_PROBABILITY) {
-      return createAiCar(laneName, y, generateRandomSpeed(CAR_MIN_SPEED, CAR_MAX_SPEED));
+    double randomForTruck = Math.random();
+    
+    if (randomForTruck >= TRUCK_PROBABILITY) {
+      int randomCarColor = Long.valueOf(Math.round(Math.random() * 2)).intValue();
+      CarColor color;
+      switch (randomCarColor) {
+        case 0 :
+          color = CarColor.BLUE;
+          break;
+        case 1 :
+          color = CarColor.ORANGE;
+          break;
+        case 2 :
+          color = CarColor.GREEN;
+          break;
+        default :
+          color = CarColor.BLUE;
+      }
+      return createAiCar(color, laneName, y, generateRandomSpeed(CAR_MIN_SPEED, CAR_MAX_SPEED));
     } else {
       return createAiTruck(laneName, y, generateRandomSpeed(TRUCK_MIN_SPEED, TRUCK_MAX_SPEED));
     }

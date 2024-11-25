@@ -15,12 +15,14 @@ public class Renderer {
 
   Image backgroundImage;
   Image roadImage;
-  Image userCarImage;
-  Image userCarBrakingImage;
-  Image randomCarImage;
-  Image randomCarBrakingImage;
-  Image randomTruckImage;
-  Image randomTruckBrakingImage;
+  Image blueCarImage;
+  Image blueCarBrakingImage;
+  Image orangeCarImage;
+  Image orangeCarBrakingImage;
+  Image greenCarImage;
+  Image greenCarBrakingImage;
+  Image truckImage;
+  Image truckBrakingImage;
 
   StringUtils stringUtils;
 
@@ -30,24 +32,28 @@ public class Renderer {
     int height,
     Image backgroundImage,
     Image roadImage,
-    Image userCarImage,
-    Image userCarBrakingImage,
-    Image randomCarImage,
-    Image randomCarBrakingImage,
-    Image randomTruckImage,
-    Image randomTruckBrakingImage
+    Image blueCarImage,
+    Image blueCarBrakingImage,
+    Image orangeCarImage,
+    Image orangeCarBrakingImage,
+    Image greenCarImage,
+    Image greenCarBrakingImage,
+    Image truckImage,
+    Image truckBrakingImage
   ) {
     this.scene = scene;
     boardWidth = width;
     boardHeight = height;
     this.backgroundImage = backgroundImage;
     this.roadImage = roadImage;
-    this.userCarImage = userCarImage;
-    this.userCarBrakingImage = userCarBrakingImage;
-    this.randomCarImage = randomCarImage;
-    this.randomCarBrakingImage = randomCarBrakingImage;
-    this.randomTruckImage = randomTruckImage;
-    this.randomTruckBrakingImage = randomTruckBrakingImage;
+    this.blueCarImage = blueCarImage;
+    this.blueCarBrakingImage = blueCarBrakingImage;
+    this.orangeCarImage = orangeCarImage;
+    this.orangeCarBrakingImage = orangeCarBrakingImage;
+    this.greenCarImage = greenCarImage;
+    this.greenCarBrakingImage = greenCarBrakingImage;
+    this.truckImage = truckImage;
+    this.truckBrakingImage = truckBrakingImage;
 
     stringUtils = new StringUtils();
   }
@@ -64,27 +70,62 @@ public class Renderer {
     }
 
     for (int i = 0; i < scene.vehicules.size(); i++) {
+      Image vehiculeImage = blueCarImage;
+      Image vehiculeBrakingImage = blueCarBrakingImage;
       Vehicule vehicule = scene.vehicules.get(i);
       if (vehicule.type == VehiculeType.CAR) {
-        if (vehicule.braking) {
-          g.drawImage(randomCarBrakingImage, vehicule.x, vehicule.y, vehicule.width, vehicule.height, null);
-        } else {
-          g.drawImage(randomCarImage, vehicule.x, vehicule.y, vehicule.width, vehicule.height, null);
+        switch (vehicule.color) {
+          case BLUE :
+            vehiculeImage = blueCarImage;
+            vehiculeBrakingImage = blueCarBrakingImage;
+            break;
+          case ORANGE :
+            vehiculeImage = orangeCarImage;
+            vehiculeBrakingImage = orangeCarBrakingImage;
+            break;
+          case GREEN :
+            vehiculeImage = greenCarImage;
+            vehiculeBrakingImage = greenCarBrakingImage;
+            break;
+          default :
+            vehiculeImage = blueCarImage;
+            vehiculeBrakingImage = blueCarBrakingImage;
         }
       }
       if (vehicule.type == VehiculeType.TRUCK) {
-        if (vehicule.braking) {
-          g.drawImage(randomTruckBrakingImage, vehicule.x, vehicule.y, vehicule.width, vehicule.height, null);
-        } else {
-          g.drawImage(randomTruckImage, vehicule.x, vehicule.y, vehicule.width, vehicule.height, null);
-        }
+        vehiculeImage = truckImage;
+        vehiculeBrakingImage = truckBrakingImage;
+      }
+      if (vehicule.braking) {
+        g.drawImage(vehiculeBrakingImage, vehicule.x, vehicule.y, vehicule.width, vehicule.height, null);
+      } else {
+        g.drawImage(vehiculeImage, vehicule.x, vehicule.y, vehicule.width, vehicule.height, null);
       }
     }
 
+    Image userVehiculeImage;
+    Image userVehiculeBrakingImage;
+    switch (scene.userVehicule.color) {
+      case BLUE :
+        userVehiculeImage = blueCarImage;
+        userVehiculeBrakingImage = blueCarBrakingImage;
+        break;
+      case ORANGE :
+        userVehiculeImage = orangeCarImage;
+        userVehiculeBrakingImage = orangeCarBrakingImage;
+        break;
+      case GREEN :
+        userVehiculeImage = greenCarImage;
+        userVehiculeBrakingImage = greenCarBrakingImage;
+        break;
+      default :
+        userVehiculeImage = blueCarImage;
+        userVehiculeBrakingImage = blueCarBrakingImage;
+    }
     if (scene.userVehicule.braking) {
-      g.drawImage(userCarBrakingImage, scene.userVehicule.x, scene.userVehicule.y, scene.userVehicule.width, scene.userVehicule.height, null);
+      g.drawImage(userVehiculeBrakingImage, scene.userVehicule.x, scene.userVehicule.y, scene.userVehicule.width, scene.userVehicule.height, null);
     } else {
-      g.drawImage(userCarImage, scene.userVehicule.x, scene.userVehicule.y, scene.userVehicule.width, scene.userVehicule.height, null);
+      g.drawImage(userVehiculeImage, scene.userVehicule.x, scene.userVehicule.y, scene.userVehicule.width, scene.userVehicule.height, null);
     }
 
     String speedString = Double.valueOf(scene.userVehicule.speed).intValue() + " km/h";

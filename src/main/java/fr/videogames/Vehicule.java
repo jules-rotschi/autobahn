@@ -20,9 +20,11 @@ public class Vehicule {
   boolean accelerating;
   boolean braking;
 
+  CarColor color;
 
-  Vehicule(VehiculeType type, int x, int y, int width, int height, double speed, int brakingForce) {
+  Vehicule(VehiculeType type, CarColor color, int x, int y, int width, int height, double speed, int brakingForce) {
     this.type = type;
+    this.color = color;
     this.x = x;
     this.y = y;
     this.width = width;

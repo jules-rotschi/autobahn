@@ -15,12 +15,14 @@ public class AutobahnGame extends JPanel implements ActionListener {
 
   ImageIcon backgroundImageIcon;
   ImageIcon roadImageIcon;
-  ImageIcon userCarImageIcon;
-  ImageIcon userCarBrakingImageIcon;
-  ImageIcon randomCarImageIcon;
-  ImageIcon randomCarBrakingImageIcon;
-  ImageIcon randomTruckImageIcon;
-  ImageIcon randomTruckBrakingImageIcon;
+  ImageIcon blueCarImageIcon;
+  ImageIcon blueCarBrakingImageIcon;
+  ImageIcon orangeCarImageIcon;
+  ImageIcon orangeCarBrakingImageIcon;
+  ImageIcon greenCarImageIcon;
+  ImageIcon greenCarBrakingImageIcon;
+  ImageIcon truckImageIcon;
+  ImageIcon truckBrakingImageIcon;
 
   Scene scene;
   Renderer renderer;
@@ -41,12 +43,14 @@ public class AutobahnGame extends JPanel implements ActionListener {
 
     backgroundImageIcon = new ImageIcon(getClass().getResource("/images/background.png"));
     roadImageIcon = new ImageIcon(getClass().getResource("/images/road.png"));
-    userCarImageIcon = new ImageIcon(getClass().getResource("/images/user-car.png"));
-    userCarBrakingImageIcon = new ImageIcon(getClass().getResource("/images/user-car-braking.png"));
-    randomCarImageIcon = new ImageIcon(getClass().getResource("/images/random-car.png"));
-    randomCarBrakingImageIcon = new ImageIcon(getClass().getResource("/images/random-car-braking.png"));
-    randomTruckImageIcon = new ImageIcon(getClass().getResource("/images/random-truck.png"));
-    randomTruckBrakingImageIcon = new ImageIcon(getClass().getResource("/images/random-truck-braking.png"));
+    blueCarImageIcon = new ImageIcon(getClass().getResource("/images/blue-car.png"));
+    blueCarBrakingImageIcon = new ImageIcon(getClass().getResource("/images/blue-car-braking.png"));
+    orangeCarImageIcon = new ImageIcon(getClass().getResource("/images/orange-car.png"));
+    orangeCarBrakingImageIcon = new ImageIcon(getClass().getResource("/images/orange-car-braking.png"));
+    greenCarImageIcon = new ImageIcon(getClass().getResource("/images/green-car.png"));
+    greenCarBrakingImageIcon = new ImageIcon(getClass().getResource("/images/green-car-braking.png"));
+    truckImageIcon = new ImageIcon(getClass().getResource("/images/truck.png"));
+    truckBrakingImageIcon = new ImageIcon(getClass().getResource("/images/truck-braking.png"));
 
     gameLoop = new Timer(1000 / 50, this);
     initializeGame();
@@ -63,12 +67,14 @@ public class AutobahnGame extends JPanel implements ActionListener {
         boardHeight,
         backgroundImageIcon.getImage(),
         roadImageIcon.getImage(),
-        userCarImageIcon.getImage(),
-        userCarBrakingImageIcon.getImage(),
-        randomCarImageIcon.getImage(),
-        randomCarBrakingImageIcon.getImage(),
-        randomTruckImageIcon.getImage(),
-        randomTruckBrakingImageIcon.getImage()
+        blueCarImageIcon.getImage(),
+        blueCarBrakingImageIcon.getImage(),
+        orangeCarImageIcon.getImage(),
+        orangeCarBrakingImageIcon.getImage(),
+        greenCarImageIcon.getImage(),
+        greenCarBrakingImageIcon.getImage(),
+        truckImageIcon.getImage(),
+        truckBrakingImageIcon.getImage()
       );
     GameControl gameControl = new GameControl(this);
     UserVehiculeControl userVehiculeControl = new UserVehiculeControl(scene.userVehicule);

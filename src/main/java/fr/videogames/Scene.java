@@ -32,7 +32,7 @@ public class Scene {
     vehiculeFactory = new VehiculeFactory(road);
     userVehicule = vehiculeFactory.createUserCar(LaneName.RIGHT_LANE, 450, 130);
     vehicules = new ArrayList<AiVehicule>();
-    vehicules.add(vehiculeFactory.createAiCar(LaneName.RIGHT_LANE, -250, 90));
+    vehicules.add(vehiculeFactory.createAiCar(CarColor.ORANGE, LaneName.RIGHT_LANE, -250, 90));
     vehiculesAddingCycle = 0;
   }
 
@@ -99,7 +99,6 @@ public class Scene {
     } while (!validVehiculePosition && !noMoreLaneToTry);
 
     if (validVehiculePosition) {
-      System.out.println("Adding a vehicule");
       vehicules.add(vehicule);
     }
   }
